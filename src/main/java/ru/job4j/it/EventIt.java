@@ -13,11 +13,11 @@ public class EventIt implements Iterator<Integer> {
 
     /**
      * Метод проверяет есть ли в массиве следующее четное значение.
-     * Если метод exist возвращает 0 значит значение есть.
+     * Если метод exist возвращает != -1 значит значения есть.
      */
     @Override
     public boolean hasNext() {
-        return exist() == 0;
+        return exist() != -1;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class EventIt implements Iterator<Integer> {
  * количество итераций цикла на point. Если очередное четное число
  * найдено не будет метод вернет -1.
  */
-    private Integer exist() {
+    private int exist() {
         var value = -1;
         for (int index = point; index < data.length; index++) {
             if (data[index] % 2 == 0) {
