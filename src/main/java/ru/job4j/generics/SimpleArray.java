@@ -37,12 +37,13 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public Object[] resize() {
             int newCap = (DEFAULT_CAP + (actSize >> 1));
-            return data =  Arrays.copyOf(data, newCap);
+            data = Arrays.copyOf(data, newCap);
+            return data;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             private int index = 0;
             @Override
             public boolean hasNext() {
