@@ -25,26 +25,20 @@ public class Generics {
         gen.printBoundedWildCard(third);
         out.println();
 
-//        gen.printLowerBoundedWildCard(first);
-//        gen.printLowerBoundedWildCard(second);
-        gen.printLowerBoundedWildCard(third);
+        gen.printLowerBoundedWildCard(first);
+        gen.printLowerBoundedWildCard(second);
+//        gen.printLowerBoundedWildCard(third);
     }
 
     public void printObject(List<?> list) {
-        for (Object next : list) {
-            out.println("Текущий элемент: " + next);
-        }
+        list.stream().map(next -> "Текущий элемент: " + next).forEach(out::println);
     }
 
     public void printBoundedWildCard(List<? extends Predator> list) {
-        for (Animal next : list) {
-            out.println("Текущий элемент: " + next);
-        }
+        list.stream().map(next -> "Текущий элемент: " + next).forEach(out::println);
     }
 
-    public void printLowerBoundedWildCard(List<? extends Tiger> list) {
-        for (Predator next : list) {
-            out.println("Текущий элемент: " + next);
-        }
+    public void printLowerBoundedWildCard(List<? super Predator> list) {
+        list.stream().map(next -> "Текущий элемент: " + next).forEach(out::println);
     }
 }
