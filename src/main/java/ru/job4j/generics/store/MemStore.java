@@ -8,15 +8,15 @@ public class MemStore<T extends Base> implements Store<T> {
     private final List<T> mem = new ArrayList<>();
 
     @Override
-    public void add(Base model) {
+    public void add(T model) {
         mem.add((T) model);
     }
 
     @Override
-    public boolean replace(String id, Base model) {
+    public boolean replace(String id, T model) {
         var index = searchId(id);
         if (index != -1) {
-            mem.set(index, (T) model);
+            mem.set(index, model);
             return true;
         }
         return false;
@@ -26,7 +26,7 @@ public class MemStore<T extends Base> implements Store<T> {
     public boolean delete(String id) {
         var index = searchId(id);
         if (index != -1) {
-            mem.remove(id);
+            mem.remove(index);
             return true;
         }
         return false;
