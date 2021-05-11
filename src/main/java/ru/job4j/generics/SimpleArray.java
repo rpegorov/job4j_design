@@ -20,7 +20,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void set(int index, T model) {
-        Objects.checkIndex(index, data.length);
+        Objects.checkIndex(index, actSize);
         data[index] = model;
     }
 
@@ -47,7 +47,7 @@ public class SimpleArray<T> implements Iterable<T> {
             private int index = 0;
             @Override
             public boolean hasNext() {
-                return index <= actSize;
+                return index < actSize;
             }
 
             @Override
