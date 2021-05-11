@@ -6,7 +6,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
     private static final int DEFAULT_CAP = 10;
     private Object[] data;
-    private int actSize;
+    private int actSize, modCount;
 
     public SimpleArray() {
         this.data = new Object[DEFAULT_CAP];
@@ -17,6 +17,7 @@ public class SimpleArray<T> implements Iterable<T> {
             resize();
         }
         data[actSize++] = model;
+        modCount++;
     }
 
     public void set(int index, T model) {
@@ -27,7 +28,8 @@ public class SimpleArray<T> implements Iterable<T> {
     public void remove(int index) {
         Objects.checkIndex(index, actSize);
         System.arraycopy(data, index + 1, data, index, actSize - index - 1);
-        actSize--;
+        data[actSize--] = null;
+        modCount--;
     }
 
     public T get(int index) {
@@ -43,10 +45,15 @@ public class SimpleArray<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
+        int expectedModCount = modCount;
         return new Iterator<>() {
             private int index = 0;
+
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return index < actSize;
             }
 

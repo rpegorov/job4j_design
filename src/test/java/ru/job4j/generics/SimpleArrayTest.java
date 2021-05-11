@@ -2,6 +2,10 @@ package ru.job4j.generics;
 
 import org.junit.Test;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -56,5 +60,33 @@ public class SimpleArrayTest {
         array.add("14");
         Object rsl = array.get(12);
         assertThat(rsl, is("13"));
+    }
+
+    @Test(expected = ConcurrentModificationException.class)
+    public void whenCorruptedIt() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.add("first");
+        Iterator<String> it = array.iterator();
+        array.add("second");
+        it.next();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void whenGetEmptyFromIt() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.iterator().next();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenGetOutBound() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.add("first");
+        array.get(1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenGetEmpty() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.get(0);
     }
 }
