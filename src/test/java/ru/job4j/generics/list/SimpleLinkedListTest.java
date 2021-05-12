@@ -1,6 +1,5 @@
 package ru.job4j.generics.list;
 
-import org.hamcrest.core.Is;
 import org.junit.Test;
 
 import java.util.Iterator;
