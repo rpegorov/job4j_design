@@ -49,7 +49,7 @@ public class SimpleLinkedListTest {
     }
 
     @Test
-    public void size() {
+    public void dynamicSizeAndGetSize() {
         List<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(1);
@@ -71,6 +71,7 @@ public class SimpleLinkedListTest {
         list.add(111);
         Object rsl = list.get(17);
         assertThat(rsl, is(111));
+        assertThat(list.getSize(), is(18));
     }
 
     @Test(expected = NoSuchElementException.class)
