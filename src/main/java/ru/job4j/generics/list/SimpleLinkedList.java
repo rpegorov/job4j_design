@@ -19,7 +19,7 @@ public class SimpleLinkedList<E> implements List<E> {
     @Override
     public void add(E value) {
         Node<E> t = tail;
-        Node<E> newNode = new Node<>(t, value, null);
+        Node<E> newNode = new Node<>(value, null);
         tail = newNode;
         if (t == null) {
             head = newNode;
