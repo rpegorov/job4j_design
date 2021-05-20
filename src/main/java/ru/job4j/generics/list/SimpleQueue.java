@@ -7,7 +7,6 @@ public class SimpleQueue<T> {
 
     public T poll() {
         if (out.isEmpty()) {
-            out.push(in.pop());
             while (!in.isEmpty()) {
                 out.push(in.pop());
             }
