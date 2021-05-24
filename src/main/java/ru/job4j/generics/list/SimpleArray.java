@@ -34,7 +34,6 @@ public class SimpleArray<T> implements Iterable<T> {
         System.arraycopy(data, index + 1, data, index, actSize - index - 1);
         data[actSize--] = null;
         modCount--;
-        actSize--;
     }
 
     public T get(int index) {
