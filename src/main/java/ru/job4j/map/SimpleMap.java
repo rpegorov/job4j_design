@@ -10,9 +10,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
-    public Object[] resize() {
-        int newCap = (capacity + (count >> 1));
-        table = Arrays.copyOf(table, newCap);
+    private Object[] resize() {
+        if (count >= table.length * LOAD_FACTOR) {
+            int newCap = (capacity + (count >> 1));
+            table = Arrays.copyOf(table, newCap);
+        }
         return table;
     }
 
@@ -20,23 +22,25 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return key.hashCode() % capacity;
     }
 
+//    private int indexFor(int hash) {
+//        int ind = hash % capacity;
+//        return ind;
+//    }
+
     @Override
     public boolean put(K key, V value) {
-        if (count >= table.length * LOAD_FACTOR) {
-            resize();
-        }
-        boolean rsl = false;
-        for (MapEntry<K, V> kvMapEntry : table) {
-            if (kvMapEntry.getKey().equals(key)) {
-                kvMapEntry.setValue(value);
-                rsl = true;
-                count++;
-                modCount++;
+        boolean rsl = true;
+        for (int i = 0; i < count; i++) {
+            if (table[i].getKey().equals(key)) {
+                table[i].setValue(value);
+                rsl = false;
             }
         }
-        if (!rsl) {
+        if (rsl) {
             resize();
-            table[capacity++] = new MapEntry<>(key, value);
+            table[(hash(key))] = new MapEntry<>(key, value);
+            modCount++;
+//            count++;
         }
         return rsl;
     }
@@ -52,16 +56,21 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean remove(K key) {
-        boolean rsl = false;
-        for (int i = 0; i < table.length; i++) {
+        boolean rsl = true;
+        for (int i = 0; i < count; i++) {
             if (table[i].getKey().equals(key)) {
-                table[i] = null;
+                table[hash(key)] = null;
                 count--;
                 modCount++;
-                rsl = true;
+                rsl = false;
             }
         }
         return rsl;
+    }
+
+    @Override
+    public int getSize() {
+        return count;
     }
 
     @Override
