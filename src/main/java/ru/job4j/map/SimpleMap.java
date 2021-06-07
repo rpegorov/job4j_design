@@ -5,36 +5,47 @@ import java.util.*;
 public class SimpleMap<K, V> implements Map<K, V> {
 
     private static final float LOAD_FACTOR = 0.75f;
-    private int capacity = 8;
+    private int capacity = 16;
     private int count, modCount;
 
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     private Object[] resize() {
-        int newCap = (capacity + (count >>> 2));
-        table = Arrays.copyOf(table, newCap);
+        if (count >= capacity * LOAD_FACTOR) {
+            int newCap = (capacity + (count * 2));
+            table = Arrays.copyOf(table, newCap);
+        }
         return table;
     }
 
     final int hash(K key) {
         int h = key.hashCode();
-        return h ^ h >>> 16;
+        return h - 1 ^ h >>> 16;
     }
 
     private int indexFor(int hash) {
-        return (table.length - 1) & hash;
+        int i = hash % (table.length - 1);
+        System.out.println(hash + " - " + i);
+        return i;
     }
 
     @Override
     public boolean put(K key, V value) {
-        table[indexFor(hash(key))] = new MapEntry<>(key, value);
-        count++;
-        modCount++;
-        if (count >= capacity * LOAD_FACTOR) {
+        boolean isPut = false;
+        int index = indexFor(hash(key));
+        MapEntry<K, V> val = table[index];
+        if (val != null
+                && val.getKey().equals(key)
+                && !val.getValue().equals(value)) {
+            val.setValue(value);
+        } else if (val == null) {
+            table[index] = new MapEntry<>(key, value);
+            count++;
             resize();
-            return true;
+            isPut = true;
         }
-        return false;
+        modCount++;
+        return isPut;
     }
 
     @Override
