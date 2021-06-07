@@ -1,6 +1,5 @@
 package ru.job4j.map;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -24,9 +23,9 @@ public class SimpleMapTest {
         Map<String, Integer> map = new SimpleMap<>();
         map.put("Test", 1);
         assertFalse(map.put("Test", 5));
+        assertThat(map.get("Test"), is(5));
     }
 
-//    @Ignore
     @Test
     public void size() {
         Map<String, Integer> map = new SimpleMap<>();
@@ -34,6 +33,21 @@ public class SimpleMapTest {
         map.put("Test2", 2);
         map.put("Test3", 1);
         assertThat(map.getSize(), is(3));
+    }
+
+    @Test
+    public void whenResize() {
+        Map<String, Integer> map = new SimpleMap<>();
+        map.put("Test", 1);
+        map.put("Test2", 2);
+        map.put("Test3", 3);
+        map.put("Test4", 4);
+        map.put("Test5", 5);
+        map.put("Test6", 6);
+        map.put("Test7", 7);
+        map.put("Test8", 8);
+        map.put("Test9", 9);
+        assertThat(map.getSize(), is(9));
     }
 
     @Test

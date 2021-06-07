@@ -11,10 +11,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     private Object[] resize() {
-        if (modCount >= table.length * LOAD_FACTOR) {
-            int newCap = (capacity + (count >> 1));
-            table = Arrays.copyOf(table, newCap);
-        }
+        int newCap = (capacity + (count >>> 2));
+        table = Arrays.copyOf(table, newCap);
         return table;
     }
 
@@ -29,20 +27,14 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean put(K key, V value) {
-        boolean rsl = true;
-        for (int i = 0; i < count; i++) {
-            if (table[i].getKey().equals(key)) {
-                table[i].setValue(value);
-                rsl = false;
-            }
-        }
-        if (rsl) {
+        table[indexFor(hash(key))] = new MapEntry<>(key, value);
+        count++;
+        modCount++;
+        if (count >= capacity * LOAD_FACTOR) {
             resize();
-            table[indexFor(hash(key))] = new MapEntry<>(key, value);
-//            count++;
-            modCount++;
+            return true;
         }
-        return rsl;
+        return false;
     }
 
     @Override
@@ -56,21 +48,19 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean remove(K key) {
-        boolean rsl = true;
-        for (int i = 0; i < count; i++) {
-            if (table[i].getKey().equals(key)) {
-                table[i] = null;
-//                count--;
-                modCount--;
-                rsl = false;
-            }
+        if (table[indexFor(hash(key))] != null && table[indexFor(hash(key))]
+                .getKey().equals(key)) {
+            table[indexFor(hash(key))] = null;
+            count--;
+            modCount++;
+            return true;
         }
-        return rsl;
+        return false;
     }
 
     @Override
     public int getSize() {
-        return modCount;
+        return count;
     }
 
     @Override
