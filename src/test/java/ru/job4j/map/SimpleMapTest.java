@@ -20,7 +20,16 @@ public class SimpleMapTest {
         assertThat(map.get("Test3"), is(1));
     }
 
-    @Ignore
+    @Test
+    public void putWhenDuplicate() {
+        Map<String, Integer> map = new SimpleMap<>();
+        map.put("Test", 1);
+        map.put("Test", 1);
+        assertThat(map.get("Test"), is(1));
+        assertThat(map.get("Test"), is(1));
+    }
+
+//    @Ignore
     @Test
     public void size() {
         Map<String, Integer> map = new SimpleMap<>();

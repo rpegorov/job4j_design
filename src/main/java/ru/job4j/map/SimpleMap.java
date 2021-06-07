@@ -11,7 +11,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     private Object[] resize() {
-        if (count >= table.length * LOAD_FACTOR) {
+        if (modCount >= table.length * LOAD_FACTOR) {
             int newCap = (capacity + (count >> 1));
             table = Arrays.copyOf(table, newCap);
         }
@@ -19,13 +19,13 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     final int hash(K key) {
-        return key.hashCode() % capacity;
+        int h = key.hashCode();
+        return h ^ h >>> 16;
     }
 
-//    private int indexFor(int hash) {
-//        int ind = hash % capacity;
-//        return ind;
-//    }
+    private int indexFor(int hash) {
+        return (table.length - 1) & hash;
+    }
 
     @Override
     public boolean put(K key, V value) {
@@ -38,9 +38,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
         }
         if (rsl) {
             resize();
-            table[(hash(key))] = new MapEntry<>(key, value);
-            modCount++;
+            table[indexFor(hash(key))] = new MapEntry<>(key, value);
 //            count++;
+            modCount++;
         }
         return rsl;
     }
@@ -59,9 +59,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
         boolean rsl = true;
         for (int i = 0; i < count; i++) {
             if (table[i].getKey().equals(key)) {
-                table[hash(key)] = null;
-                count--;
-                modCount++;
+                table[i] = null;
+//                count--;
+                modCount--;
                 rsl = false;
             }
         }
@@ -70,7 +70,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public int getSize() {
-        return count;
+        return modCount;
     }
 
     @Override
