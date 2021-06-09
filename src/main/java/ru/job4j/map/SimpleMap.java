@@ -5,17 +5,21 @@ import java.util.*;
 public class SimpleMap<K, V> implements Map<K, V> {
 
     private static final float LOAD_FACTOR = 0.75f;
-    private int capacity = 16;
+    private int capacity = 8;
     private int count, modCount;
 
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     private Object[] resize() {
-        if (count >= capacity * LOAD_FACTOR) {
-            int newCap = (capacity + (count * 2));
-            table = Arrays.copyOf(table, newCap);
+        int newCap = (capacity + (count << 1));
+        MapEntry<K, V>[] newTable = new MapEntry[newCap];
+        for (MapEntry<K, V> e : table) {
+            if (e != null) {
+                int index = indexFor(hash(e.getKey()));
+                newTable[index] = e;
+            }
         }
-        return table;
+        return newTable;
     }
 
     final int hash(K key) {
@@ -24,20 +28,21 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int indexFor(int hash) {
-        int i = hash % (table.length - 1);
-        System.out.println(hash + " - " + i);
+        int i = Math.floorMod(hash, table.length);
         return i;
     }
 
     @Override
     public boolean put(K key, V value) {
         boolean isPut = false;
+        if (count >= capacity * LOAD_FACTOR) {
+            resize();
+        }
         int index = indexFor(hash(key));
         MapEntry<K, V> val = table[index];
-        if (val != null
-                && val.getKey().equals(key)
-                && !val.getValue().equals(value)) {
+        if (val != null && val.getKey().equals(key)) {
             val.setValue(value);
+            return false;
         } else if (val == null) {
             table[index] = new MapEntry<>(key, value);
             count++;
@@ -50,28 +55,35 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        return Arrays.stream(table)
-                .filter(Objects::nonNull)
-                .filter(e -> e.getKey().equals(key))
-                .map(MapEntry::getValue)
-                .findFirst().orElse(null);
+        int index = indexFor(hash(key));
+        MapEntry<K, V> isGet = table[index];
+        if (isGet != null) {
+            return isGet.getKey().equals(key) ? isGet.getValue() : null;
+        }
+        return null;
     }
 
     @Override
     public boolean remove(K key) {
-        if (table[indexFor(hash(key))] != null && table[indexFor(hash(key))]
-                .getKey().equals(key)) {
-            table[indexFor(hash(key))] = null;
+        boolean rsl = false;
+        int index = indexFor(hash(key));
+        MapEntry<K, V> isRemove = table[index];
+        if (isRemove != null && isRemove.getKey().equals(key)) {
+            isRemove = null;
             count--;
             modCount++;
-            return true;
+            rsl = true;
         }
-        return false;
+        return rsl;
     }
 
     @Override
     public int getSize() {
-        return count;
+        int size = (int) Arrays.stream(table)
+                .filter(Objects::nonNull)
+                .map(MapEntry::getKey)
+                .count();
+        return size;
     }
 
     @Override
