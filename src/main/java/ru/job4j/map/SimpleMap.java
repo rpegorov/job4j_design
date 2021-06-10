@@ -11,7 +11,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     private Object[] resize() {
-        int newCap = (capacity + (count << 1));
+        int newCap = (capacity + (getSize() << 1));
         MapEntry<K, V>[] newTable = new MapEntry[newCap];
         for (MapEntry<K, V> e : table) {
             if (e != null) {
@@ -36,7 +36,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean put(K key, V value) {
         boolean isPut = false;
         if (count >= capacity * LOAD_FACTOR) {
-            resize();
+            table = (MapEntry<K, V>[]) resize();
         }
         int index = indexFor(hash(key));
         MapEntry<K, V> val = table[index];
@@ -46,7 +46,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
         } else if (val == null) {
             table[index] = new MapEntry<>(key, value);
             count++;
-            resize();
             isPut = true;
         }
         modCount++;
