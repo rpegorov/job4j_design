@@ -11,7 +11,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     private Object[] resize() {
-        int newCap = (capacity + (getSize() << 1));
+        int newCap = (capacity + (count << 1));
         MapEntry<K, V>[] newTable = new MapEntry[newCap];
         for (MapEntry<K, V> e : table) {
             if (e != null) {
