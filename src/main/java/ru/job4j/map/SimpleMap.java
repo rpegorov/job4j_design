@@ -78,11 +78,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public int getSize() {
-        int size = (int) Arrays.stream(table)
-                .filter(Objects::nonNull)
-                .map(MapEntry::getKey)
-                .count();
-        return size;
+        return count;
     }
 
     @Override

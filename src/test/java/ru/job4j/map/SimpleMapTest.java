@@ -58,6 +58,7 @@ public class SimpleMapTest {
         map.put("Test2", 2);
         map.put("Test3", 1);
         assertTrue(map.remove("Test"));
+        assertThat(map.getSize(), is(2));
     }
 
     @Test
@@ -67,5 +68,6 @@ public class SimpleMapTest {
         map.put("Test2", 2);
         map.put("Test3", 1);
         assertTrue(map.remove("Test2"));
+        assertThat(map.getSize(), is(2));
     }
 }
