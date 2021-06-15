@@ -92,7 +92,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return index < count;
+                return index < capacity;
             }
 
             @Override
