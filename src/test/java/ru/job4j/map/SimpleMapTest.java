@@ -1,6 +1,11 @@
 package ru.job4j.map;
 
 import org.junit.Test;
+import ru.job4j.generics.list.SimpleArray;
+
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -69,5 +74,20 @@ public class SimpleMapTest {
         map.put("Test3", 1);
         assertTrue(map.remove("Test2"));
         assertThat(map.getSize(), is(2));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void itTest() {
+        Map<Integer, Integer> map = new SimpleMap<>();
+        map.iterator().next();
+    }
+
+    @Test(expected = ConcurrentModificationException.class)
+    public void whenCorruptedIt() {
+        Map<Integer, Integer> map = new SimpleMap<>();
+        map.put(1, 1);
+        Iterator<Integer> it = map.iterator();
+        map.put(2, 2);
+        it.next();
     }
 }

@@ -92,16 +92,19 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return index < capacity;
+                for (int i = index; i < table.length; i++) {
+                    if (table[i] != null) {
+                        index = i;
+                        return true;
+                    }
+                }
+                return false;
             }
 
             @Override
             public K next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                while (table[index] == null) {
-                    index++;
                 }
                 return table[index++].getKey();
             }
