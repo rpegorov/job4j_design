@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node<E> {
-    @SuppressWarnings("checkstyle:VisibilityModifier")
-    final E value;
 
-    @SuppressWarnings("checkstyle:VisibilityModifier")
-    final List<Node<E>> children = new ArrayList<>();
+    private final E value;
+
+    private final List<Node<E>> children = new ArrayList<>();
 
     public Node(E value) {
         this.value = value;
+    }
+
+    public E getValue() {
+        return value;
+    }
+
+    public List<Node<E>> getChildren() {
+        return children;
     }
 }
