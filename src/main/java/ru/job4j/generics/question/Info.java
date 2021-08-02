@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Info {
 
-    private int added;
-    private int changed;
-    private int deleted;
+    int added;
+    int changed;
+    int deleted;
 
     public Info(int added, int changed, int deleted) {
         this.added = added;
@@ -14,41 +14,23 @@ public class Info {
         this.deleted = deleted;
     }
 
-    public int getAdded() {
-        return added;
-    }
+//    public  Info() {
+//        this.added = added;
+//        this.changed = changed;
+//        this.deleted = deleted;
+//    }
 
-    public void setAdded(int added) {
-        this.added = added;
-    }
-
-    public int getChanged() {
-        return changed;
-    }
-
-    public void setChanged(int changed) {
-        this.changed = changed;
-    }
-
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
-    }
-
-    public void added() {
-        added++;
-    }
-
-    public void changed() {
-        changed++;
-    }
-
-    public void deleted() {
-        deleted++;
-    }
+//    public void added() {
+//        added++;
+//    }
+//
+//    public void changed() {
+//        changed++;
+//    }
+//
+//    public int deleted() {
+//        return deleted++;
+//    }
 
     @Override
     public boolean equals(Object o) {
