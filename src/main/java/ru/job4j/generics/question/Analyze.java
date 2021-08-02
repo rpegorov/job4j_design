@@ -1,10 +1,18 @@
 package ru.job4j.generics.question;
 
-import ru.job4j.generics.set.Set;
+
+import java.util.Set;
 
 public class Analyze {
 
     public static Info diff(Set<User> previous, Set<User> current) {
-        return null;
+        Info rsl = new Info(0, 0, 0);
+        for (User user : current) {
+            if (!previous.contains(user)) {
+                rsl.added();
+                current.remove(user);
+            }
+        }
+        return rsl;
     }
 }

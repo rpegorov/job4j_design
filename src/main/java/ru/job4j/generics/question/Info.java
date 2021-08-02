@@ -38,6 +38,18 @@ public class Info {
         this.deleted = deleted;
     }
 
+    public void added() {
+        added++;
+    }
+
+    public void changed() {
+        changed++;
+    }
+
+    public void deleted() {
+        deleted++;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
