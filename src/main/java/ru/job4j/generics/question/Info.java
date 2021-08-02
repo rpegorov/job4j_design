@@ -4,33 +4,15 @@ import java.util.Objects;
 
 public class Info {
 
-    int added;
-    int changed;
-    int deleted;
+    protected int added;
+    protected int changed;
+    protected int deleted;
 
     public Info(int added, int changed, int deleted) {
         this.added = added;
         this.changed = changed;
         this.deleted = deleted;
     }
-
-//    public  Info() {
-//        this.added = added;
-//        this.changed = changed;
-//        this.deleted = deleted;
-//    }
-
-//    public void added() {
-//        added++;
-//    }
-//
-//    public void changed() {
-//        changed++;
-//    }
-//
-//    public int deleted() {
-//        return deleted++;
-//    }
 
     @Override
     public boolean equals(Object o) {
