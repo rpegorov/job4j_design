@@ -10,9 +10,9 @@ public class ResultFiles {
         try (FileOutputStream out = new FileOutputStream("result.txt")) {
             for (int i = 1; i <= 10; i++) {
                 for (int j = 0; j <= 9; j++) {
-                    String rsl = " ";
-                    rsl += i + "x" + j + "=" + (i * j) + "\t";
-                    rsl += System.lineSeparator();
+                    StringBuilder sb = new StringBuilder(i + " x " + j + " = " + (i * j)
+                    + System.lineSeparator());
+                    String rsl = sb.toString();
                     out.write(rsl.getBytes());
                 }
             }
