@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LogFilter {
-    @SuppressWarnings("checkstyle:EmptyBlock")
     public static List<String> filter(String file) {
         List<String> list = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new FileReader("log.txt"))) {
+        try (BufferedReader in = new BufferedReader(new FileReader((file)))) {
             list = in.lines()
                     .map(s -> s.split(" "))
                     .filter(n -> "404".equals(n[n.length - 2]))
