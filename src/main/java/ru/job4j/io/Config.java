@@ -16,8 +16,6 @@ public class Config {
     }
 
     public void load() {
-       // Метод load() - должен считать все ключи в карту values.
-        // Важно в файле могут быть пустые строки и комментарии их нужно пропускать.
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 if (line.equals("") || line.startsWith("#")) {
