@@ -10,7 +10,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutComment() {
-        String path = "/Users/user/IdeaProjects/job4j_design/app.properties.txt";
+        String path = "./app.properties.txt";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.connection.username"), is("postgres"));
@@ -27,7 +27,7 @@ public class ConfigTest {
 
     @Test
     public void whenMoreComment() {
-        String path = "/Users/user/IdeaProjects/job4j_design/app.propertiesBigfile.txt";
+        String path = "./app.propertiesBigfile.txt";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.connection.username"), is("postgres"));
