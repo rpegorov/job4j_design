@@ -19,7 +19,7 @@ public class ConfigTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenPairWithNull() {
-        String path = "/Users/user/IdeaProjects/job4j_design/app.propertiesNullString.txt";
+        String path = "./app.propertiesNullString.txt";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name"), is(Matchers.nullValue()));
