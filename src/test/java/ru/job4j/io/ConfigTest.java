@@ -25,6 +25,22 @@ public class ConfigTest {
         assertThat(config.value("name"), is(Matchers.nullValue()));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNullKey() {
+        String path = "./app.propertiesBigfile.txt";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value(""), is(Matchers.nullValue()));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNotSplit() {
+        String path = "./app.propertiesBigfile.txt";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("test3"), is(Matchers.nullValue()));
+    }
+
     @Test
     public void whenMoreComment() {
         String path = "./app.propertiesBigfile.txt";
