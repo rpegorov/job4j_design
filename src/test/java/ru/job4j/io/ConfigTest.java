@@ -35,7 +35,7 @@ public class ConfigTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenNotSplit() {
-        String path = "./app.propertiesBigfile.txt";
+        String path = "./app.propertiesInvalidFormat.txt";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("test3"), is(Matchers.nullValue()));
