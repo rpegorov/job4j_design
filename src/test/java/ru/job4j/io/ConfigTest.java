@@ -25,7 +25,7 @@ public class ConfigTest {
         assertThat(config.value("name"), is(Matchers.nullValue()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void whenNullKey() {
         String path = "./app.propertiesBigfile.txt";
         Config config = new Config(path);
