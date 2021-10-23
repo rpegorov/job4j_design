@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Analysis {
-    public void unavailable(String source, String target) {
+    public static void unavailable(String source, String target) {
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
             try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
                 List<String[]> list = in.lines().map(n -> n.split(" ")).collect(Collectors.toList());
@@ -28,6 +28,7 @@ public class Analysis {
     }
 
     public static void main(String[] args) {
-        new Analysis().unavailable("serverLog.txt", "target.txt");
+        new Analysis();
+        unavailable("serverLog.txt", "target.txt");
     }
 }
