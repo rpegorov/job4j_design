@@ -26,9 +26,4 @@ public class Analysis {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        new Analysis();
-        unavailable("serverLog.txt", "target.txt");
-    }
 }
