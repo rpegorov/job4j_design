@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,10 +18,10 @@ public class Search {
         if (args[1] == null) {
             throw new IllegalArgumentException("File extension is null. Specify the extension");
         }
-        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        search(start, p -> p.toFile().getName().endsWith("." + args[1])).forEach(System.out::println);
     }
 
-    public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
+    public static @NotNull List<Path> search(Path root, Predicate<Path> condition) throws IOException {
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
