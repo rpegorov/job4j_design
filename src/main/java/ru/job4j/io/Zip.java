@@ -40,8 +40,6 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-        packSingleFile(new File("./pom.xml"),
-                new File("./pom.zip"));
         ArgsName argsName = ArgsName.of(args);
         packFiles(
                 Search.search(Path.of(argsName.get("d")),
