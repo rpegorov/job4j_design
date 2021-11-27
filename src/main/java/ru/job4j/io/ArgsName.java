@@ -13,7 +13,7 @@ public class ArgsName {
         return values.get(key);
     }
 
-    private void parse(String @NotNull [] args) {
+    private void parse(String[] args) {
         String key;
         String value;
         String[] param;
@@ -32,7 +32,7 @@ public class ArgsName {
         }
     }
 
-    public static @NotNull ArgsName of(String[] args) {
+    public static ArgsName of(String[] args) {
         ArgsName name = new ArgsName();
         name.parse(args);
         return name;
