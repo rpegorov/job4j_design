@@ -1,7 +1,5 @@
 package ru.job4j.io;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +10,7 @@ import java.util.function.Predicate;
 
 public class Search {
 
-    private static void isValid(String @NotNull [] args) {
+    private static void isValid(String[] args) {
         if (args.length < 2) {
             throw new IllegalArgumentException("Invalid set arguments");
         }
@@ -23,7 +21,7 @@ public class Search {
         }
     }
 
-    public static @NotNull List<Path> search(Path root, Predicate<Path> condition) throws IOException {
+    public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
