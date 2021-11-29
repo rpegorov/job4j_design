@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 
 public class Search {
 
-    private static boolean isValid(String @NotNull [] args) {
+    private static void isValid(String @NotNull [] args) {
         if (args.length < 2) {
             throw new IllegalArgumentException("Invalid set arguments");
         }
@@ -21,7 +21,6 @@ public class Search {
             throw new IllegalArgumentException(
                     "Not search file or Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
-        return true;
     }
 
     public static @NotNull List<Path> search(Path root, Predicate<Path> condition) throws IOException {
