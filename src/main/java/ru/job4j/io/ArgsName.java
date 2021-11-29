@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,23 +14,26 @@ public class ArgsName {
         return values.get(key);
     }
 
+    private static void isValid(String @NotNull [] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Invalid set arguments");
+        }
+        if (!Arrays.toString(args).matches("(.*)=(.*)")) {
+            throw new IllegalArgumentException("Data does not match key-value pattern");
+        }
+    }
+
     private void parse(String[] args) {
         String key;
         String value;
         String[] param;
-        if (args.length > 0) {
+        isValid(args);
             for (String string : args) {
                 param = string.split("=");
-                if (param.length < 2) {
-                    throw new IllegalArgumentException();
-                }
                 key = param[0].replace("-", "");
                 value = param[1];
                 values.put(key, value);
             }
-        } else {
-            throw new IllegalArgumentException();
-        }
     }
 
     public static ArgsName of(String[] args) {
@@ -39,8 +43,8 @@ public class ArgsName {
     }
 
     public static void main(String[] args) {
-        ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512", "-encoding=UTF-8"});
-        System.out.println(jvm.get("Xmx"));
+        ArgsName jvm = ArgsName.of(new String[]{"-Xml=512", "-encoding=UTF-8"});
+        System.out.println(jvm.get("Xml"));
 
         ArgsName zip = ArgsName.of(new String[]{"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
