@@ -22,7 +22,7 @@ public class Search {
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
-        SearchFiles searcher = new SearchFiles(condition);
+        SearchFiles searcher = new SearchFiles(condition.negate());
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
