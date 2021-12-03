@@ -3,6 +3,7 @@ package ru.job4j.io;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class ArgsName {
 
@@ -12,12 +13,11 @@ public class ArgsName {
         return values.get(key);
     }
 
-    private static void isValid(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Invalid set arguments");
-        }
-        if (!Arrays.toString(args).matches("(.*)=(.*)")) {
-            throw new IllegalArgumentException("Data does not match key-value pattern");
+    private void isValid(String[] args) {
+        for (String s : args) {
+            if (s.charAt(0) != '-' | !s.contains("=")) {
+                throw new IllegalArgumentException("Data does not match key-value pattern");
+            }
         }
     }
 
@@ -25,13 +25,17 @@ public class ArgsName {
         String key;
         String value;
         String[] param;
-        isValid(args);
-            for (String string : args) {
-                param = string.split("=");
+        if (!(args.length == 0)) {
+            isValid(args);
+            for (String s : args) {
+                param = s.split("=");
                 key = param[0].replace("-", "");
                 value = param[1];
                 values.put(key, value);
             }
+        } else {
+            throw new IllegalArgumentException("Invalid set arguments");
+        }
     }
 
     public static ArgsName of(String[] args) {
