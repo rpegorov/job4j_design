@@ -1,4 +1,6 @@
-package ru.job4j.io;
+package ru.job4j.io.duplicates;
+
+import ru.job4j.io.readAndWrite.FileProperty;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;

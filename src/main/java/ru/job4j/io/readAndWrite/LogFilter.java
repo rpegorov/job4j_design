@@ -1,4 +1,4 @@
-package ru.job4j.io;
+package ru.job4j.io.readAndWrite;
 
 import java.io.*;
 import java.util.ArrayList;
