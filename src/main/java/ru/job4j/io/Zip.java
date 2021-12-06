@@ -37,7 +37,7 @@ public class Zip {
         isValid(args);
         packFiles(
                 Search.search(Path.of(argsName.get("d")),
-                        p -> p.toFile().
+                        p -> !p.toFile().
                         getName().
                         endsWith(argsName.get("e"))),
                 new File(argsName.get("o"))
