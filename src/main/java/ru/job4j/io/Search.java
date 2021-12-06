@@ -7,7 +7,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
-
+/**
+ The class searches for a file
+ in the specified directory
+ by the specified file extension
+ */
 public class Search {
 
     private static void isValid(String[] args) {
