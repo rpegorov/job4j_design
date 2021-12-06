@@ -2,6 +2,7 @@ package ru.job4j.io.consoleChat;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -47,7 +48,7 @@ public class ConsoleChat {
         List<String> answers = new ArrayList<>();
         try (BufferedReader bf = new BufferedReader(
                 new FileReader(
-                        botAnswer, Charset.forName("WINDOWS-1251")))) {
+                        botAnswer, StandardCharsets.UTF_8))) {
             bf.lines().forEach(answers::add);
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +59,7 @@ public class ConsoleChat {
     private void saveLog(List<String> log) {
         try (PrintWriter pw = new PrintWriter(
                 new FileWriter(
-                        path, Charset.forName("WINDOWS-1251"), true))) {
+                        path, StandardCharsets.UTF_8, true))) {
             log.forEach(pw::println);
         } catch (IOException e) {
             e.printStackTrace();
