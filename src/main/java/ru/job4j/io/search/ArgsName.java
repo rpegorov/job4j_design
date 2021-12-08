@@ -11,6 +11,10 @@ public class ArgsName {
         return values.get(key);
     }
 
+    public Map<String, String> getValues() {
+        return values;
+    }
+
     private void isValid(String[] args) {
         for (String s : args) {
             if (s.charAt(0) != '-' | !s.contains("=")) {
@@ -39,13 +43,5 @@ public class ArgsName {
         ArgsName name = new ArgsName();
         name.parse(args);
         return name;
-    }
-
-    public static void main(String[] args) {
-        ArgsName jvm = ArgsName.of(new String[]{"-out=project.zip", "-encoding=UTF-8"});
-        System.out.println(jvm.get("encoding"));
-
-        ArgsName zip = ArgsName.of(new String[]{"-out=project.zip", "-encoding=UTF-8"});
-        System.out.println(zip.get("out"));
     }
 }
