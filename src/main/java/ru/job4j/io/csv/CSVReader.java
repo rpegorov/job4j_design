@@ -47,7 +47,7 @@ public class CSVReader {
                         .append(tmp.get(indexFilter.get(1))).append(System.lineSeparator());
             }
         }
-        if (args.get("out").equals("stdout")) {
+        if ("stdout".equals(args.get("out"))) {
             System.out.print(rsl);
         } else {
             try (PrintWriter out = new PrintWriter(
