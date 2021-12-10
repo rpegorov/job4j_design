@@ -35,13 +35,13 @@ public class CSVReaderTest {
                 "Jack;25",
                 "William;30"
         ).concat(System.lineSeparator());
-        CSVReader.handle(argsName);
+        CSVReader.handleOf(argsName);
         Assert.assertEquals(expected, Files.readString(target.toPath()));
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void whenInvalidArgs() throws Exception {
         ArgsName argsName = ArgsName.of(new String[]{});
-       CSVReader.handle(argsName);
+       CSVReader.handleOf(argsName);
     }
 }

@@ -12,16 +12,19 @@ import java.util.stream.Collectors;
 public class CSVReader {
 
     private static void isValid(ArgsName args) {
-        if (args.getValues().size() == 0) {
+        if (args.getValues().size() != 4) {
             throw new IllegalArgumentException("Invalid set arguments");
         }
         File f = new File(args.get("path"));
         if (!f.isFile() || !f.exists()) {
             throw new IllegalArgumentException("File not found or file not exist");
         }
+        if (!args.get("delimiter").equals(";")) {
+            throw new IllegalArgumentException("Incorrect delimiter in File");
+        }
     }
 
-    public static void handle(ArgsName args) throws IOException {
+    private static void handle(ArgsName args) throws IOException {
         isValid(args);
         StringBuilder rsl = new StringBuilder();
         List<String[]> list = new ArrayList<>();
@@ -56,7 +59,7 @@ public class CSVReader {
         }
     }
 
-    public static void main(ArgsName args) throws IOException {
+    public static void handleOf(ArgsName args) throws IOException {
         handle(args);
     }
 }
