@@ -14,8 +14,8 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     String word = in.readLine().substring(10).split(" ")[0];
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-                        serverMSG(server, out, word);
                         System.out.println(str);
+                        serverMSG(server, out, word);
                     }
                     out.flush();
                 }
@@ -24,19 +24,14 @@ public class EchoServer {
     }
 
     private static void serverMSG(ServerSocket server, OutputStream out, String word) throws IOException {
-        String msg;
         if ("hello".equals(word)) {
-            msg = "hello )";
             out.write("HTTP/1.1 200 OK\r\n".getBytes());
-            out.write(msg.getBytes());
-        }
-        if ("exit".equals(word)) {
+            out.write("hello =^_^=".getBytes());
+        } else if ("exit".equals(word)) {
             server.close();
-        }
-        if (!"hello".equals(word) && !"exit".equals(word)) {
-            msg = "what?)";
+        } else {
             out.write("HTTP/1.1 200 OK\r\n".getBytes());
-            out.write(msg.getBytes());
+            out.write("What? ``O_o".getBytes());
         }
     }
 }
