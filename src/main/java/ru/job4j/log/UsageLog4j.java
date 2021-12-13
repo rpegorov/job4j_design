@@ -7,14 +7,17 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class);
 
     public static void main(String[] args) {
-        var name = "Rostislav";
-        var age = 30;
-        var telephone = 8912;
-        var work = false;
-        var pikabu = 49.5d;
+        byte b = 127;
+        short sh = 32767;
+        int i = 32767327;
+        long l = 327673276;
+        float f = 327.67f;
+        double d = 32.7673276d;
+        boolean bool = true;
 
-        LOG.debug("User info name: {}, age: {}, telephone: {}, work: {}, read pikabu: {} ",
-                name, age, telephone, work, pikabu);
+        LOG.debug("Info - b - byte : {}, sh - short : {}, i - int : {}, "
+                       + "l - long : {}, f - float : {}, d - double : {} bool - boolean : {}",
+                b, sh, i, l, f, d, bool);
 
     }
 }
