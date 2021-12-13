@@ -14,10 +14,11 @@ public class UsageLog4j {
         float f = 327.67f;
         double d = 32.7673276d;
         boolean bool = true;
+        char c = 'c';
 
         LOG.debug("Info - b - byte : {}, sh - short : {}, i - int : {}, "
-                       + "l - long : {}, f - float : {}, d - double : {} bool - boolean : {}",
-                b, sh, i, l, f, d, bool);
+                       + "l - long : {}, f - float : {}, d - double : {} bool - boolean : {}, c - char : {}",
+                b, sh, i, l, f, d, bool, c);
 
     }
 }
