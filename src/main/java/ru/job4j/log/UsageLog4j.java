@@ -7,10 +7,14 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class);
 
     public static void main(String[] args) {
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        var name = "Rostislav";
+        var age = 30;
+        var telephone = 8912;
+        var work = false;
+        var pikabu = 49.5d;
+
+        LOG.debug("User info name: {}, age: {}, telephone: {}, work: {}, read pikabu: {} ",
+                name, age, telephone, work, pikabu);
+
     }
 }
