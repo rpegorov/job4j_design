@@ -15,7 +15,6 @@ public class Persona {
         this.contact = contact;
     }
 
-    @SuppressWarnings("checkstyle:OperatorWrap")
     @Override
     public String toString() {
         return "Persona{"
