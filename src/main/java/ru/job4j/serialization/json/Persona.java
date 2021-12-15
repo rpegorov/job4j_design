@@ -1,12 +1,20 @@
 package ru.job4j.serialization.json;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+@XmlRootElement(name = "Persona")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Persona {
-    private final String[] fullName;
-    private final int age;
-    private final char sex;
-    private final Contact contact;
+    @XmlElementWrapper(name = "Persons")
+    @XmlElement(name = "persona")
+    private String[] fullName;
+    private int age;
+    private char sex;
+    private Contact contact;
+
+    public Persona() {
+    }
 
     public Persona(String[] fullName, int age, char sex, Contact contact) {
         this.fullName = fullName;

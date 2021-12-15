@@ -1,9 +1,17 @@
 package ru.job4j.serialization.json;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "Employee")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
-    private final boolean worker;
-    private final int standing;
-    private final Persona persona;
+    @XmlAttribute
+    private boolean worker;
+    private int standing;
+    private Persona persona;
+
+    public Employee() {
+    }
 
     public Employee(boolean worker, int standing, Persona persona) {
         this.worker = worker;
