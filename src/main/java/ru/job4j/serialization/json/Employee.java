@@ -10,6 +10,30 @@ public class Employee {
     private int standing;
     private Persona persona;
 
+    public boolean isWorker() {
+        return worker;
+    }
+
+    public void setWorker(boolean worker) {
+        this.worker = worker;
+    }
+
+    public int getStanding() {
+        return standing;
+    }
+
+    public void setStanding(int standing) {
+        this.standing = standing;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
     public Employee() {
     }
 

@@ -13,6 +13,38 @@ public class Persona {
     private String sex;
     private Contact contact;
 
+    public String[] getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String[] fullName) {
+        this.fullName = fullName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     public Persona() {
     }
 
