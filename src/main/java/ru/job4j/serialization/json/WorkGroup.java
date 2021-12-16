@@ -5,11 +5,13 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.sound.midi.Soundbank;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,11 +90,9 @@ public class WorkGroup {
     /**
      * JSON Object in Array
      */
-    private static void toPojoMetArray() {
-        List<String> l = new ArrayList<>();
-        l.add("Worker");
-        l.add("Standing");
-        l.add("Persona Name");
+    private static void toPojoMetArray(Employee employee) {
+        List<Employee> l = new ArrayList<>();
+        l.add(employee);
         JSONArray jsonArray = new JSONArray(l);
         System.out.println(jsonArray);
         System.out.println("********------********------********------********");
@@ -119,7 +119,7 @@ public class WorkGroup {
         toXML(employee);
         toPojoMetPut(employee);
         toPojoMetPut(employee);
-        toPojoMetArray();
+        toPojoMetArray(employee);
         toPojoToString();
 
 
