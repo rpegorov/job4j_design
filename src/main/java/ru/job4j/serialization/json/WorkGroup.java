@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 public class WorkGroup {
     public static void main(String[] args) {
         final Employee employee = new Employee(true, 4,
-                new Persona(new String[]{"Ivan Podorov"}, 34, 'M',
+                new Persona(new String[]{"Ivan Podorov"}, 34, "M",
                         new Contact("8912 111 111 11", "Syktyvkar")));
 
         final Gson gson = new GsonBuilder().create();

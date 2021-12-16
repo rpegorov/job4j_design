@@ -14,7 +14,7 @@ import java.io.StringWriter;
 public class WorkGroupToXML {
     public static void main(String[] args) throws Exception {
         Employee employee = new Employee(true, 4,
-                new Persona(new String[]{"Ivan Podorov"}, 34, 'M',
+                new Persona(new String[]{"Ivan Podorov"}, 34, "M",
                         new Contact("8912 111 111 11", "Syktyvkar")));
 
         JAXBContext context = JAXBContext.newInstance(Employee.class);

@@ -10,13 +10,13 @@ public class Persona {
     @XmlElement(name = "persona")
     private String[] fullName;
     private int age;
-    private char sex;
+    private String sex;
     private Contact contact;
 
     public Persona() {
     }
 
-    public Persona(String[] fullName, int age, char sex, Contact contact) {
+    public Persona(String[] fullName, int age, String sex, Contact contact) {
         this.fullName = fullName;
         this.age = age;
         this.sex = sex;
