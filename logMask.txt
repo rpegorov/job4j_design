@@ -1,0 +1,1 @@
+./app.propertiesBigfile.txt./LogChatBot.txt./result.txt./target.txt./app.propertiesNullString.txt./logSearcher.txt./serverLog.txt./resultLog.txt./app.propertiesInvalidFormat.txt./app.properties.txt./input.txt./log.txt./serverLogNotDown.txt./szArraysOut.txt./BotAnswer.txt./serverLog4DownDataFile.txt./even.txt
