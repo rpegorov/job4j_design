@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static ru.job4j.io.search.Search.search;
+
 public class SearcherFile {
     public static void main(String[] args) throws IOException {
         ArgsName argsName = ArgsName.of(args);
@@ -20,14 +22,15 @@ public class SearcherFile {
         List<Path> paths = new ArrayList<>();
         String searchTypes = argsName.get("t");
         if ("mask".equals(searchTypes)) {
-            paths = Search.search(root, s -> s.toFile().getName().endsWith(argsName.get("n")));
+            String regex = argsName.get("n").replace("?", ".").replace("*", ".*");
+            paths = (search(root, s -> Pattern.matches(regex, s.toFile().getName())));
         }
         if ("name".equals(searchTypes)) {
-            paths = Search.search(root, s -> s.toFile().getName().startsWith(argsName.get("n")));
+            paths = search(root, s -> s.toFile().getName().startsWith(argsName.get("n")));
         }
         if ("regex".equals(searchTypes)) {
             Pattern pattern = Pattern.compile(argsName.get("n"));
-            paths = Search.search(root, s -> pattern.matcher(s.toFile().getName()).find());
+            paths = search(root, s -> pattern.matcher(s.toFile().getName()).find());
         }
         return paths;
     }
