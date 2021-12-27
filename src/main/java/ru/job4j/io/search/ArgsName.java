@@ -34,7 +34,7 @@ public class ArgsName {
         for (String s : args) {
             param = s.split("=");
             key = param[0].replace("-", "");
-            value = param[1].replace("*", "");
+            value = param[1];
             values.put(key, value);
         }
     }
