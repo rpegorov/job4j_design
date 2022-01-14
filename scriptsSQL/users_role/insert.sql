@@ -18,3 +18,28 @@ insert into users (id, "First_name", "Last_name", "Tel_number", email) values (1
 insert into users (id, "First_name", "Last_name", "Tel_number", email) values (18, 'Palmer', 'Bartolomeu', '+591 219 148 7953', 'pbartolomeuh@ameblo.jp');
 insert into users (id, "First_name", "Last_name", "Tel_number", email) values (19, 'Margy', 'Trouncer', '+62 101 655 8664', 'mtrounceri@netscape.com');
 insert into users (id, "First_name", "Last_name", "Tel_number", email) values (20, 'Keely', 'Matskiv', '+52 230 707 5450', 'kmatskivj@last.fm');
+
+insert into category (export, moving) VALUES (true, false);
+insert into category (export, moving) VALUES (false, true);
+
+insert into comments (id, comment) VALUES (1, 'Срочно!');
+
+insert into attach (id, attachs) VALUES (1, 'insert file...');
+
+insert into item (id, items, attach_id, comments_id, users_id) VALUES (1, 'поставка лесопродукции', 1, 1, 10);
+insert into item (id, items, attach_id, comments_id, users_id) VALUES (2, 'закупка бумаги', 1, 1, 19);
+insert into status (id, executed) VALUES (1, 0);
+
+insert into cat_state (category_id, status_id) values (1, 1);
+insert into cat_state (category_id, status_id) values (2, 1);
+
+insert into rules (id, read, write, add_users, redact_item, redact_cat) VALUES (1, true, true, true, true, true);
+insert into rules (id, read, write, add_users, redact_item, redact_cat) VALUES (2, true, true, false, true, false);
+insert into rules (id, read, write, add_users, redact_item, redact_cat) VALUES (3, true, true, false, true, true);
+
+insert into role_rule (id, role_id, rule_id, user_id) VALUES (1, 1, 1, 1);
+insert into role_rule (id, role_id, rule_id, user_id) VALUES (2, 2, 2, 10);
+insert into role_rule (id, role_id, rule_id, user_id) VALUES (3, 2, 2, 11);
+insert into role_rule (id, role_id, rule_id, user_id) VALUES (4, 2, 2, 12);
+insert into role_rule (id, role_id, rule_id, user_id) VALUES (5, 3, 3, 19);
+insert into role_rule (id, role_id, rule_id, user_id) VALUES (6, 3, 3, 20);
