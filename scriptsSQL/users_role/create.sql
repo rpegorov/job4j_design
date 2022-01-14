@@ -1,11 +1,11 @@
 create table rules
 (
-    id        serial primary key,
-    read      bool,
-    write     bool,
-    add_users bool,
+    id          serial primary key,
+    read        bool,
+    write       bool,
+    add_users   bool,
     redact_item bool,
-    redact_cat bool
+    redact_cat  bool
 );
 
 create table role
@@ -27,38 +27,26 @@ create table users
     role_id      int references role (id)
 );
 
-create table role_users
+create table role_rules
 (
     id       serial primary key,
-    user_name varchar(50) not null,
-    users_id int references users (id),
-    role_id  int references role (id)
-);
-
-create table role_rule(
-  id serial primary key,
-  user_name varchar(50) not null,
-  role_id int references role (id),
-  rule_id int references rules (id)
-);
-
-create table cat_state
-(
-    id          serial primary key,
-    category_id int references category (id),
-    status_id   int references status (id)
+    role_id  int references role (id),
+    rules_id int references rules (id),
+    user_id  int references users (id)
 );
 
 create table comments
 (
     id      serial primary key,
-    comment text
+    comment text,
+    item_id int references item (id)
 );
 
 create table attach
 (
     id      serial primary key,
-    attachs text
+    attachs text,
+    item_id int references item (id)
 );
 
 create table category
@@ -80,7 +68,9 @@ create table item
     items       varchar(255),
     attach_id   int references attach (id),
     comments_id int references comments (id),
-    users_id    int references users (id)
+    users_id    int references users (id),
+    category_id int references category (id),
+    status_id   int references status (id)
 );
 
 
