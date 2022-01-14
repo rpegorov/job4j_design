@@ -58,7 +58,7 @@ create table comments
 create table attach
 (
     id      serial primary key,
-    attachs json
+    attachs text
 );
 
 create table category
