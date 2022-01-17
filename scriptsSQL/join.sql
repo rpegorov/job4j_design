@@ -1,18 +1,40 @@
-select * from users join role r on users.role_id = r.id;
+create table driver(
+id serial primary key,
+name varchar(100),
+phone int
+);
 
-select * from item join category c2 on item.category_id = c2.id;
+create table car(
+id serial primary key,
+model varchar(100),
+number varchar (20),
+driver_id int references driver(id)
+);
 
-select uu."First_name" as имя, r.admin as администратор from users as uu
-join role r on uu.role_id = r.id;
+create table car_driver(
+    id serial primary key,
+    car_id int references car(id),
+    driver_id int references driver(id)
+);
 
-select i.items as заявка, c.export as экспорт from item as i
-join category c on i.category_id = c.id;
 
-select u."First_name" as имя, i as заявка from item as i
-join users u on i.users_id = u.id
+insert into driver(name, phone) VALUES ('driver1', 11111111);
+insert into driver(name, phone) VALUES ('driver2', 11111112);
+insert into driver(name, phone) VALUES ('driver3', 11111113);
 
-select i.category_id as категория, users."First_name" as имя from users
-join item i on users.id = i.users_id;
+insert into car(model, number, driver_id) VALUES ('car1', 111, 1);
+insert into car(model, number, driver_id) VALUES ('car2', 222, 2);
+insert into car(model, number, driver_id) VALUES ('car3', 333, 3);
+insert into car(model, number, driver_id) VALUES ('car1', 111, 1);
+insert into car(model, number, driver_id) VALUES ('car1', 111, 1);
 
-select a as файл, item as заявка from item
-join attach a on a.item_id = a.id;
+select * from driver join car c on driver_id = c.id;
+
+select d.name as Имя, c.number from car c
+join driver d on c.driver_id = d.id;
+
+select d.name as имя, c.model as марка, c.driver_id позывной from car c
+join driver d on c.driver_id = d.id;
+
+select d.name, d.phone, c.model, c.number from car c
+join driver d on c.driver_id = d.id;
