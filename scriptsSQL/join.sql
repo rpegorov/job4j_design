@@ -15,4 +15,4 @@ select i.category_id as категория, users."First_name" as имя from us
 join item i on users.id = i.users_id;
 
 select a as файл, item as заявка from item
-join attach a on a.item_id = a.id
+join attach a on a.item_id = a.id;
