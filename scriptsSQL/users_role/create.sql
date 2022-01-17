@@ -13,8 +13,7 @@ create table role
     id         serial primary key,
     admin      boolean,
     contractor boolean,
-    agent      boolean,
-    rules_id   int references rules (id)
+    agent      boolean
 );
 
 create table users
@@ -31,22 +30,7 @@ create table role_rules
 (
     id       serial primary key,
     role_id  int references role (id),
-    rules_id int references rules (id),
-    user_id  int references users (id)
-);
-
-create table comments
-(
-    id      serial primary key,
-    comment text,
-    item_id int references item (id)
-);
-
-create table attach
-(
-    id      serial primary key,
-    attachs text,
-    item_id int references item (id)
+    rules_id int references rules (id)
 );
 
 create table category
@@ -55,6 +39,7 @@ create table category
     export boolean,
     moving bool
 );
+
 
 create table status
 (
@@ -66,11 +51,22 @@ create table item
 (
     id          serial primary key,
     items       varchar(255),
-    attach_id   int references attach (id),
-    comments_id int references comments (id),
     users_id    int references users (id),
     category_id int references category (id),
     status_id   int references status (id)
 );
 
+create table attach
+(
+    id      serial primary key,
+    attachs text,
+    item_id int references item (id)
+);
+
+create table comments
+(
+    id      serial primary key,
+    comment text,
+    item_id int references item (id)
+);
 
