@@ -1,3 +1,5 @@
+--create table
+
 create table type(
     id serial primary key,
     name text

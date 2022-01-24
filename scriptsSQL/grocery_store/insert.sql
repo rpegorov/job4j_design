@@ -1,3 +1,5 @@
+
+--inset table
 insert into type (name)
 VALUES ('Молочные'),
        ('Хлебобулочные'),

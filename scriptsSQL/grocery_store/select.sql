@@ -1,3 +1,5 @@
+--selects
+
 --Просроченные продукты
 select p.name, p.expired_date
 from product p
