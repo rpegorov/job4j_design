@@ -60,15 +60,15 @@ left outer join transmission t on t.id = c.id_trns;
 
 select b.body_type
 from body b
-full join car c on b.id = c.id_body
+left join car c on b.id = c.id_body
 where c.id is null;
 
 select e.eng_type, e.eng_capacity, e.eng_volume
 from engine e
-full join car c on e.id = c.id_eng
+left join car c on e.id = c.id_eng
 where c.id is null;
 
 select t.trns_type, t.trns_gears
 from transmission t
-full join car c on t.id = c.id_trns
+left join car c on t.id = c.id_trns
 where c.id is null;
