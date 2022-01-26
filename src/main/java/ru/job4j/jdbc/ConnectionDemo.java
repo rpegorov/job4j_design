@@ -12,8 +12,9 @@ public class ConnectionDemo {
         Config config = new Config("./src/main/resources/app.properties.txt");
         config.load();
         Class.forName(config.value("driver"));
-        try (Connection connection = DriverManager.getConnection
-                (config.value("url"), config.value("login"), config.value("password"))) {
+        try (Connection connection = DriverManager.getConnection(config.value("url"),
+                config.value("login"),
+                config.value("password"))) {
             DatabaseMetaData metaData = connection.getMetaData();
             System.out.println(metaData.getUserName());
             System.out.println(metaData.getURL());
