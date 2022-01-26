@@ -9,6 +9,9 @@ env:
   global:
     - CODECOV_TOKEN="f7462f24-c7e8-4dca-ae87-c3dee5ec89d3"
 
+services:
+  - postgresql
+
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонний сервис https://codecov.io/
 after_success:
@@ -17,6 +20,6 @@ after_success:
 notifications:
   email:
     recipients:
-      -rail.shamsemukhametov@mail.ru
+      -rpegorov@icloud.com
     on_success: never # default: change
     on_failure: always # default: always
