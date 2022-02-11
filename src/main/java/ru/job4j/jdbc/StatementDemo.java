@@ -4,6 +4,7 @@ import ru.job4j.io.readAndWrite.Config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.StringJoiner;
 
@@ -32,7 +33,7 @@ public class StatementDemo {
         }
     }
 
-    public static String getTableScheme(Connection connection, String tableName) throws Exception {
+    static String getString(Connection connection, String tableName) throws SQLException {
         var rowSeparator = "-".repeat(30).concat(System.lineSeparator());
         var header = String.format("%-15s|%-15s%n", "NAME", "TYPE");
         var buffer = new StringJoiner(rowSeparator, rowSeparator, rowSeparator);
@@ -49,5 +50,9 @@ public class StatementDemo {
             }
         }
         return buffer.toString();
+    }
+
+    public static String getTableScheme(Connection connection, String tableName) throws Exception {
+        return getString(connection, tableName);
     }
 }

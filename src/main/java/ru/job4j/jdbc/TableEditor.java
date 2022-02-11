@@ -6,13 +6,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-import java.util.StringJoiner;
+
+import static ru.job4j.jdbc.StatementDemo.getString;
 
 public class TableEditor implements AutoCloseable {
     private Connection connection;
-    private Properties properties;
+    final Properties properties;
 
-    public TableEditor(Properties properties) throws ClassNotFoundException, SQLException, IOException {
+    public TableEditor(Properties properties) throws ClassNotFoundException, SQLException {
         this.properties = properties;
         initConnection();
     }
@@ -71,10 +72,11 @@ public class TableEditor implements AutoCloseable {
 
     public static void main(String[] args) throws Exception {
         Properties properties = new Properties();
-        FileInputStream in = new FileInputStream("./src/main/resources/connection_idea-db.txt");
-        properties.load(in);
-        try {
-            TableEditor tableEditor = new TableEditor(properties);
+        try (FileInputStream in = new FileInputStream(
+                "./src/main/resources/connection_idea-db.txt")) {
+            properties.load(in);
+        }
+        try (TableEditor tableEditor = new TableEditor(properties)) {
             tableEditor.createTable("demo_table");
             tableEditor.addColumn("demo_table", "name", "text");
             tableEditor.addColumn("demo_table", "lastname", "text");
@@ -84,26 +86,10 @@ public class TableEditor implements AutoCloseable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static String getTableScheme(Connection connection, String tableName) throws Exception {
-        var rowSeparator = "-".repeat(30).concat(System.lineSeparator());
-        var header = String.format("%-15s|%-15s%n", "NAME", "TYPE");
-        var buffer = new StringJoiner(rowSeparator, rowSeparator, rowSeparator);
-        buffer.add(header);
-        try (var statement = connection.createStatement()) {
-            var selection = statement.executeQuery(String.format(
-                    "select * from %s limit 1", tableName
-            ));
-            var metaData = selection.getMetaData();
-            for (int i = 1; i <= metaData.getColumnCount(); i++) {
-                buffer.add(String.format("%-15s|%-15s%n",
-                        metaData.getColumnName(i), metaData.getColumnTypeName(i))
-                );
-            }
-        }
-        return buffer.toString();
+        return getString(connection, tableName);
     }
 
     @Override
