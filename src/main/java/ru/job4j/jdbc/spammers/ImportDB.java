@@ -13,7 +13,7 @@ import java.util.Properties;
 
 public class ImportDB {
     final Properties cfg;
-    private String dump;
+    private final String dump;
 
     public ImportDB(Properties properties, String dump) {
         this.cfg = properties;
@@ -23,7 +23,13 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(dump))) {
-            br.lines().forEach(s -> users.add(new User(s.split(";")[0], s.split(";")[1])));
+            br.lines().forEach(s -> {
+                String[] values = s.split(";");
+                if (values.length != 2 || values[0].isEmpty() || values[1].isEmpty()) {
+                    throw new IllegalArgumentException("Illegal args");
+            }
+                users.add(new User(s.split(";")[0], s.split(";")[1]));
+            });
         }
         return users;
     }
